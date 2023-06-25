@@ -37,7 +37,6 @@ module "rabbitmq"{
     source = "./ec2"
     name = "rabbitmq"
 }
-
 module "dispatch"{
     source = "./ec2"
     name = "dispatch"
@@ -47,3 +46,4 @@ module "user"{
     source = "./ec2"
     name = "user"
 }
+
