@@ -7,7 +7,7 @@ resource "aws_instance" "ec2" {
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sg.id]
   tags = {
-    Name = ${var}.name
+    Name = "${var}.name"
   }
 }
 
@@ -19,7 +19,7 @@ data "aws_ami" "ec2" {
 }
 
 resource "aws_security_group" "sg" {
-  name        = ${var}.name
+  name        = "${var}.name"
   description = "Allow all inbound traffic"
  
   ingress {
@@ -40,7 +40,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = ${var}.name
+    Name = "${var}.name"
   }
 }
 
