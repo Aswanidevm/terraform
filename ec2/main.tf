@@ -19,7 +19,7 @@ data "aws_ami" "ec2" {
 }
 
 resource "aws_security_group" "sg" {
-  name        = "${var}.name-sg"
+  name        = "${var.name}-sg"
   description = "Allow all inbound traffic"
  
   ingress {
@@ -38,7 +38,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "${var}.name"
+    Name = "${var.name}"
   }
 }
 
