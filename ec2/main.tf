@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "ec2" {
-  ami           = "data.aws_ami.ec2.id" 
+  ami           = data.aws_ami.ec2.id
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sg.id]
   tags = {
@@ -14,7 +14,7 @@ resource "aws_instance" "ec2" {
 data "aws_ami" "ec2" {
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
-  owners           = ["self"]
+  owners           = ["973714476881"]
 }
 
 resource "aws_security_group" "sg" {
