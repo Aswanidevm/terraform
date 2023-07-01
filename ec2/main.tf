@@ -7,14 +7,15 @@ data "aws_ami" "ec2" {
 resource "aws_instance" "ec2" {
   for_each = each.instances
   ami           = data.aws_ami.ec2.id
-  instance_type = each.instance_type
+  instance_type = each.value["instance_type"]
   tags = {
     Name = each.key
   }
 }
 
 resource "aws_security_group" "sg" {
-  name        = "${var.name}-sg"
+  for_each = each.instances
+  name        = "${each.value["name"]}-sg"
   description = "Allow TLS inbound traffic"
 
 
