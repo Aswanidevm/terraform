@@ -13,7 +13,6 @@ resource "aws_instance" "ec2" {
   tags = {
     Name = each.key
   }
-}
 
 provisioner "remote-exec" {
 
@@ -30,6 +29,7 @@ provisioner "remote-exec" {
      ansible-pull -i localhost, -U https://github.com/Aswanidevm/Devops/tree/f180152498705703a9801143a55ee8b4533d780a/ansible main.yml,
     ]
   }
+}
 
   resource "aws_route53_record" "dns-record" {
     for_each = var.instances
