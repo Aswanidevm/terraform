@@ -7,7 +7,7 @@ data "aws_ami" "ec2" {
 resource "aws_instance" "ec2" {
   for_each = var.instances
   ami           = data.aws_ami.ec2.id
-  instance_type = lookup(each.value, "instance_type", t3.micro)
+  instance_type = lookup(each.value, "instance_type", "t3.micro")
   tags = {
     Name = each.key
   }
