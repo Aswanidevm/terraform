@@ -33,7 +33,7 @@ provisioner "remote-exec" {
 
   resource "aws_route53_record" "dns-record" {
     for_each = var.instances
-  zone_id = Z04818282BOE8RVGV13K7
+  zone_id = "Z04818282BOE8RVGV13K7"
   name    = "${each.value["name"]}"
   type    = "A"
   ttl     = "300"
