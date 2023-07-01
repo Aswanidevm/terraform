@@ -21,6 +21,7 @@ module "mysql"{
 module "cart"{
     source = "./ec2"
     
+} 
 
 module "shipping"{
     source = "./ec2"
