@@ -5,17 +5,16 @@ data "aws_ami" "ec2" {
 }
 
 resource "aws_instance" "ec2" {
+  for_each = each.instances
   ami           = data.aws_ami.ec2.id
-  instance_type = "t3.micro"
-  
-
+  instance_type = each.instance_type
   tags = {
-    Name = var.name
+    Name = each.name
   }
 }
 
 resource "aws_security_group" "sg" {
-  name        = "${var.name}-sg"
+  name        = "${each.name}-sg"
   description = "Allow TLS inbound traffic"
 
 
@@ -36,7 +35,61 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "var.name"
+    Name = "each.name"
   }
 }
-variable name{}
+
+
+variable instances{
+  default = {
+    frontend = {
+      instance_type = "t3.micro"
+      name = "frontend"
+   }
+
+    mongodb = {
+      instance_type = "t3.micro"
+      name = "mongodb"
+   }
+
+    catalogue = {
+      instance_type = "t3.micro"
+      name = "catalogue"
+   }
+
+    mysql = {
+      instance_type = "t3.micro"
+      name = "mysql"
+  }
+
+    cart = {
+      instance_type = "t3.micro"
+      name = "cart"
+  }
+
+    shipping = {
+      instance_type = "t3.micro"
+      name = "shipping"
+  }
+
+    redis = {
+      instance_type = "t3.micro"
+      name = "redis"
+  }
+
+    rabbitmq = {
+      instance_type = "t3.micro"
+      name = "rabbitmq"
+  }
+
+    dispatch = {
+      instance_type = "t3.micro"
+      name = "dispatch"
+  }
+
+    user = {
+      instance_type = "t3.micro"
+      name = "user"
+  }
+ }
+}
