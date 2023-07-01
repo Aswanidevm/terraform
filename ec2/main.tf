@@ -14,7 +14,7 @@ resource "aws_instance" "ec2" {
 }
 
 resource "aws_security_group" "sg" {
-  name        = "${each.key}-sg"
+  name        = "${var.name}-sg"
   description = "Allow TLS inbound traffic"
 
 
@@ -35,7 +35,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "each.key"
+    Name = "var.name"
   }
 }
 
