@@ -9,12 +9,12 @@ resource "aws_instance" "ec2" {
   ami           = data.aws_ami.ec2.id
   instance_type = each.instance_type
   tags = {
-    Name = each.name
+    Name = each.key
   }
 }
 
 resource "aws_security_group" "sg" {
-  name        = "${each.name}-sg"
+  name        = "${each.key}-sg"
   description = "Allow TLS inbound traffic"
 
 
@@ -35,7 +35,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "each.name"
+    Name = "each.key"
   }
 }
 
