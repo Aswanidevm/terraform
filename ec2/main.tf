@@ -36,7 +36,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "each.value["name"]"
+    Name = each.value["name"]
   }
 }
 
