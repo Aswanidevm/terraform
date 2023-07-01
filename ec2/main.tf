@@ -4,6 +4,8 @@ data "aws_ami" "ec2" {
   owners = ["973714476881"] 
 }
 
+
+
 resource "aws_instance" "ec2" {
   for_each = var.instances
   ami           = data.aws_ami.ec2.id
@@ -11,6 +13,31 @@ resource "aws_instance" "ec2" {
   tags = {
     Name = each.key
   }
+}
+
+provisioner "remote-exec" {
+
+  connection {
+    type     = "ssh"
+    user     = "centos"
+    password = "DevOps321"
+    host     = self.public_ip
+  }
+
+  
+    inline = [
+     sudo labauto ansible,
+     ansible-pull -i localhost, -U https://github.com/Aswanidevm/Devops/tree/f180152498705703a9801143a55ee8b4533d780a/ansible main.yml,
+    ]
+  }
+
+  resource "aws_route53_record" "dns-record" {
+    for_each = var.instances
+  zone_id = Z04818282BOE8RVGV13K7
+  name    = "${each.value["name"]}"
+  type    = "A"
+  ttl     = "300"
+  records = ["aws_instance.ec2.private.ip"]
 }
 
 resource "aws_security_group" "sg" {
