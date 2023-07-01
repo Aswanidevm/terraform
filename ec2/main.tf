@@ -14,13 +14,16 @@ resource "aws_instance" "ec2" {
     Name = each.key
   }
 
-provisioner "remote-exec" {
+}
+
+resource "null_resource" "ansible"{
+  provisioner "remote-exec" {
 
   connection {
     type     = "ssh"
     user     = "centos"
     password = "DevOps321"
-    host     = self.public_ip
+    host     = aws_instance.ec2.public_ip
   }
 
   
@@ -31,8 +34,8 @@ provisioner "remote-exec" {
   }
 }
 
-  resource "aws_route53_record" "dns-record" {
-    for_each = var.instances
+resource "aws_route53_record" "dns-record" {
+  for_each = var.instances
   zone_id = "Z04818282BOE8RVGV13K7"
   name    = "${each.value["name"]}"
   type    = "A"
