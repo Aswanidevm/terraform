@@ -34,10 +34,10 @@ resource "null_resource" "ansible"{
 
 resource "aws_route53_record" "wwww" {
   zone_id = "Z04818282BOE8RVGV13K7"
-  name    = "${var.component}"
+  name    = "${var.component}.myprojecdevops.info"
   type    = "A"
   ttl     = "300"
-  records = ["aws_instance.ec2.private.ip"]
+  records = [aws_instance.ec2.private.ip]
 }
 
 resource "aws_security_group" "sg" {
