@@ -67,5 +67,5 @@ resource "aws_security_group" "sg" {
 }
 
 
-variable component{}
-variable instance_type{}
+variable "component"{}
+variable "instance_type"{}
