@@ -1,50 +1,60 @@
-module "frontend"{
-    source = "./ec2"
-  
+module "ec2"{
+  for_each = var.instances
+  source = "./ec2"
+  component = each.vale[name]
+  instance_type = lookup(each.value, "instance_type", "t3.small")
 }
 
-module "mongodb"{
-    source = "./ec2"
-  
+variable instances{
+  default = {
+    frontend = {
+      instance_type = "t3.micro"
+      name = "frontend"
+   }
+
+    mongodb = {
+      instance_type = "t3.micro"
+      name = "mongodb"
+   }
+
+    catalogue = {
+      instance_type = "t3.micro"
+      name = "catalogue"
+   }
+
+    mysql = {
+      instance_type = "t3.micro"
+      name = "mysql"
+  }
+
+    cart = {
+      instance_type = "t3.micro"
+      name = "cart"
+  }
+
+    shipping = {
+      instance_type = "t3.micro"
+      name = "shipping"
+  }
+
+    redis = {
+      instance_type = "t3.micro"
+      name = "redis"
+  }
+
+    rabbitmq = {
+      instance_type = "t3.micro"
+      name = "rabbitmq"
+  }
+
+    dispatch = {
+      instance_type = "t3.micro"
+      name = "dispatch"
+  }
+
+    user = {
+      instance_type = "t3.micro"
+      name = "user"
+  }
+ }
 }
-
-module "catalogue"{
-    source = "./ec2"
-   
-}
-
-module "mysql"{
-    source = "./ec2"
-    
-}
-
-module "cart"{
-    source = "./ec2"
-    
-} 
-
-module "shipping"{
-    source = "./ec2"
-   
-}
-
-module "redis"{
-    source = "./ec2"
-   
-}
-
-module "rabbitmq"{
-    source = "./ec2"
- 
-}
-
-module "dispatch"{
-    source = "./ec2"
-  
-}
-
-module "user"{
-    source = "./ec2"
- 
-}
-
