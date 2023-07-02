@@ -37,7 +37,7 @@ resource "aws_route53_record" "wwww" {
   name    = "${var.component}.myprojecdevops.info"
   type    = "A"
   ttl     = "300"
-  records = [aws_instance.ec2.private.ip]
+  records = [aws_instance.ec2.private_ip]
 }
 
 resource "aws_security_group" "sg" {
